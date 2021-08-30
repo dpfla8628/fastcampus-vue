@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">{{reverseMsg}}</div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "Hello",
+        },
+        computed: {
+          reverseMsg: {
+            //getter : return O
+            get() {
+              return this.msg.split("").reverse().join("");
+            },
+            //setter : return X
+            //테스트 방법 : vm.reverseMsg='Good'
+            set(value) {
+              this.msg = value;
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
