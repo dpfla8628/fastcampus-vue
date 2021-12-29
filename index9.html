@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue v-model & @input test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+    </style>
+
+    <div id = "app">
+        <!--양방향-->
+        <!-- <input type="text" v-model="msg"> -->
+        
+        <!-- 한글에서는 아래와 같이 한 단어가 입력될 때마다 갱신 -->
+        <!-- <input type="text" @input="msg = $event.target.value"> -->
+        
+        <!--단방향 & 양방향-->
+        <input type="text" @input="bindMsg" :value="msg">
+        <div>{{msg}}</div>
+    </div>
+
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            data: {
+                msg: 'Hello'
+            },
+            methods: {
+                bindMsg (e) {
+                    this.msg = e.target.value
+                }
+            }
+        })
+    </script>
+</body>
+</html>

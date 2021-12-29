@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue click event test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+    </style>
+
+    <div id = "app">
+        <ul>
+            <!-- 여러 메소드를 넣을 경우 반드시 괄호를 넣고 세미콜론으로 연결한다 -->
+            <li v-for="(todo, index) in todos" 
+            :key="index"
+            :class="'item' + (index+1)"
+            @click="clickMethod1(todo.title, $event); clickMethod2()">
+            {{todo.title}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            data: {
+                todos: [
+                    { title : '아침'},
+                    { title : '점심'},
+                    { title : '저녁'}
+                ],
+            },
+            methods: {
+                clickMethod1 (title, event) {
+                    console.log('click1')
+                    console.log(title)
+                    console.log(event.currentTarget)
+                },
+                clickMethod2 () {
+                    console.log('click2')
+                }
+            }
+        })
+    </script>
+</body>
+</html>
