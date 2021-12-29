@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <style>
+      .normal {
+        color: blue;
+      }
+      .active {
+        color: red;
+      }
+    </style>
+
+    <div id="app">
+      <!-- 한번만 랜더링 -> 이후 데이터 변화시 적용되지않음-->
+      <div v-once>{{msg}}</div>
+      <div>{{msg}}</div>
+      <div>{{msg}}</div>
+      <div>{{msg}}</div>
+
+      <!--텍스트 안에있는 태그 인식-->
+      <div v-html="msg2"></div>
+
+      <!--다양한 숫자 계산 가능-->
+      <div>{{number+4}}</div>
+      <div>{{new Date()}}</div>
+      <div>{{Math.round(1.7)}}</div>
+
+      <!--클래스 동적 삽입-->
+      <div :class="className" @click="changeClassName">{{msg}}</div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          msg: "Hello Vue!",
+          msg2: "Good </br> job",
+          number: 2,
+          className: "normal",
+        },
+        methods: {
+          changeClassName() {
+            this.className = "active";
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
+

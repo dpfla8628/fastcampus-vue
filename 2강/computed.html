@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="todos">
+        <div v-for="todo in computedTodos" :key="todo.id">
+          <input type="checkbox" v-model="todo.done" />
+          <span>{{todo.title}}</span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          todos: [{ title: "아침" }, { title: "점심" }, { title: "저녁" }],
+        },
+        // 반드시 return 이 있어야한다.
+        computed: {
+          computedTodos() {
+            //map : 실행한 결과를 가지고 새로운 배열을 return할 때 사용, for Each와 같은 구문
+            return this.todos.map((todo, index) => {
+              //?? Object.assign(target,source) :  하나 이상의 속성들을 목표 객체로 복사
+              // return Object.assign({},todo,{
+              //     id : index+1,
+              //     done : false
+              // })
+              return {
+                  //스프레드 문법
+                ...todo,
+                id: index + 1,
+                done: false,
+              };
+            });
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
