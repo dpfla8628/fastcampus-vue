@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue set test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+        .box { 
+            width: 200px;
+            height: 150px;
+            background-color: red;
+        }
+    </style>
+
+    <div id = "app">
+        <button @click="pushTodo">PUSH</button>
+        <ul class="todos">
+            <li v-for="(todo, index) in todos" 
+            :key="index">
+            {{todo.title}}
+        </li>
+    </ul>
+    <button @click="addHomepage">addHomepage</button>
+    <ul class="test">
+            <li v-for="(val, key, index) in test"
+                :key="index">
+                {{val}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            data: {
+                todos: [
+                    { title : '아침'},
+                    { title : '점심'},
+                    { title : '저녁'}
+                ],
+                test: {
+                    name: 'yerim',
+                    age: '25'
+                }
+            },
+            methods: {
+                pushTodo () {
+                    // 화면 갱신이 안됨
+                    // this.todos[3] = {title: '야식'}
+                    // 화면 갱신 ok
+                    // this.todos.push({title: '야식'})
+                    this.$set(this.todos, this.todos.length, {title: '야식'})
+                },
+                addHomepage() {
+                    this.$set(this.test, 'homepage', 'test.blog')
+                }
+            }
+        })
+    </script>
+</body>
+</html>

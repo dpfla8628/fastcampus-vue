@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue 반응성 test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+        .box { 
+            width: 200px;
+            height: 150px;
+            background-color: red;
+        }
+    </style>
+
+    <div id = "app">
+        <button @click="pushTodo">PUSH</button>
+        <ul class="todos">
+            <li v-for="(todo, index) in todos" 
+                :key="index">
+                {{todo.title}}
+            </li>
+        </ul>
+        <ul class="test">
+            <li v-for="(val, key, index) in test"
+                :key="index">
+                {{val}}
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            data: {
+                todos: [
+                    { title : '아침'},
+                    { title : '점심'},
+                    { title : '저녁'}
+                ],
+                test: {
+                    name: 'yerim',
+                    age: '25'
+                    // 데이터 갱신 화면에 나타내는 방법
+
+                    // 1. 사용하지 않더라도 정의해두기
+                    // 반응성을 갖기 위해서 미리 정의하자
+                    // vm.test.homepage = 'test' 라고 데이터 갱신하면 들어간다
+                    // homepage: '',
+                    // email: ''
+                    
+                    //2. 통으로 객체 갱신
+                    // vm.test=Object.assign({}, vm.test, {
+                    //     homepage:'test'
+                    // })
+                }
+            },
+            methods: {
+                pushTodo () {
+                    // 화면 갱신이 안됨
+                    // this.todos[3] = {title: '야식'}
+                    this.todos.push({title: '야식'})
+                }
+            }
+        })
+    </script>
+</body>
+</html>

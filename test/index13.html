@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue emit test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+    </style>
+
+    <div id = "app">
+        <my-component :my-msg="message" @my-event="updateMsg"/>
+    </div>
+
+    <script>
+        // 자식
+        Vue.component('my-component', {
+            template: '<div @click="updateMsg">{{ myMsg }}</div>',
+            props: {
+                myMsg: String
+            },
+            methods: {
+                updateMsg () {
+                    // 하위에서 값을 변경하면 콘솔 에러 발생
+                    // this.myMsg = 'Good'
+                    this.$emit('my-event', 'Good')
+                }
+            }
+        })
+
+        //부모
+        const vm = new Vue ({
+            el: '#app',
+            data() { 
+                return {
+                    message : 'Hello!'
+                }
+            },
+            methods: {
+                updateMsg(value) {
+                    this.message = value
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<head>
+    <html lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue event bubbling stop test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+        .parent {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+        .child {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+
+    <div id = "app">
+        <div class="parent" @click="childHandler">
+            <!-- 이벤트 버블링 막기 -->
+            <div class="child" @click.stop="childHandler">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue ({
+            el: '#app',
+            methods: {
+                childHandler (event) {
+                    console.log(event.currentTarget.className)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
